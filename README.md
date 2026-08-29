@@ -30,8 +30,17 @@ tests/                 Cross-package and product-level tests
 
 The repository intentionally begins with no speculative services, databases, APIs, admin panels, or deployment infrastructure. Those should be introduced only when a validated product requirement justifies them.
 
-## Before implementation
+## Technical foundation
 
-Before building the website, define and validate an explicit research-to-product handoff for the first visualization. That handoff should identify the authoritative source version, exported assets and data schemas, supported parameter ranges, validation expectations, attribution, and any product-safe transformations.
+The initial product foundation is a pnpm monorepo with a statically exported Next.js application, shared UI primitives, and a reusable React Three Fiber visualization package. TypeScript, Tailwind CSS, Zod, ESLint, and Vitest provide the baseline development and validation tooling.
+
+    pnpm install
+    pnpm dev
+    pnpm lint
+    pnpm typecheck
+    pnpm test
+    pnpm build
+
+The first research handoff has been accepted for local/private MVP development. See docs/MVP_ACCEPTANCE.md for its scientific scope and release gates, and docs/ARCHITECTURE.md for the product architecture and build-time handoff strategy.
 
 See `AGENTS.md` for the project governance rules that apply to all implementation work.

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Container } from "@visifold/ui";
 import { ScientificCanvas } from "@visifold/visualization";
 
@@ -23,6 +25,15 @@ export default function HomePage() {
             <p className="mt-7 max-w-md text-base leading-7 text-secondary md:text-lg md:leading-8">
               Interactive scientific visualization for physics and mathematics.
             </p>
+            <Link
+              className="mt-9 inline-flex items-center gap-3 border-b border-[#55595c] pb-2 text-sm text-secondary transition-colors hover:border-paper hover:text-paper"
+              href="/visualizations/thermal-cones"
+            >
+              Explore Thermal Cones
+              <span aria-hidden="true" className="font-mono text-xs">
+                →
+              </span>
+            </Link>
           </div>
 
           <figure>

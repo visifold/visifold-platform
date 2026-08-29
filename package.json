@@ -9,10 +9,13 @@
   },
   "scripts": {
     "dev": "pnpm --filter @visifold/web dev",
+    "dev:thermal-cones": "pnpm research:stage:thermal-cones && pnpm dev",
     "build": "pnpm --filter @visifold/web build",
-    "lint": "pnpm -r --if-present lint",
-    "typecheck": "pnpm -r --if-present typecheck",
-    "test": "pnpm -r --if-present test"
+    "build:thermal-cones": "pnpm research:stage:thermal-cones && pnpm build",
+    "lint": "eslint apps packages scripts",
+    "typecheck": "tsc --project tsconfig.scripts.json --noEmit && pnpm -r --if-present typecheck",
+    "test": "vitest run scripts && pnpm -r --if-present test",
+    "research:stage:thermal-cones": "tsx scripts/stage-thermal-cones.ts"
   },
   "devDependencies": {
     "@types/node": "26.4.0",
@@ -23,6 +26,7 @@
     "eslint-config-next": "16.3.3",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "tsx": "4.23.12",
     "typescript": "5.9.3",
     "vitest": "4.1.11"
   }

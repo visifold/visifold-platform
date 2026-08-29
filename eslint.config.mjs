@@ -6,7 +6,7 @@ export default defineConfig([
   ...nextVitals,
   ...nextTypeScript,
   {
-    files: ["packages/**/*.{ts,tsx}"],
+    files: ["**/*.{js,mjs,ts,tsx}"],
     rules: {
       "@next/next/no-html-link-for-pages": "off",
     },

@@ -13,9 +13,9 @@ Research project
 → public interactive visualization
 ```
 
-The product should consume validated handoffs and exported assets from research. It must not reinterpret or reconstruct authoritative equations, scientific conclusions, geometry, or datasets without an explicit research source. Product-optimized transformations may be stored here when their provenance and transformation are documented.
+The product consumes validated handoffs and exported assets from research. It must not reinterpret or reconstruct authoritative equations, scientific conclusions, geometry, or datasets without an explicit research source. Product-optimized transformations may be stored here when their provenance and transformation are documented.
 
-## Initial structure
+## Workspace structure
 
 ```text
 apps/
@@ -28,7 +28,7 @@ scripts/               Product development and maintenance scripts
 tests/                 Cross-package and product-level tests
 ```
 
-The repository intentionally begins with no speculative services, databases, APIs, admin panels, or deployment infrastructure. Those should be introduced only when a validated product requirement justifies them.
+The repository intentionally has no speculative services, databases, APIs, admin panels, or deployment infrastructure. Those should be introduced only when a validated product requirement justifies them.
 
 ## Technical foundation
 
@@ -41,6 +41,14 @@ The initial product foundation is a pnpm monorepo with a statically exported Nex
     pnpm test
     pnpm build
 
-The first research handoff has been accepted for local/private MVP development. See docs/MVP_ACCEPTANCE.md for its scientific scope and release gates, and docs/ARCHITECTURE.md for the product architecture and build-time handoff strategy.
+## Thermal Cone local development
 
-See `AGENTS.md` for the project governance rules that apply to all implementation work.
+The first research handoff is accepted for local/private MVP development. Configure `VISIFOLD_RESEARCH_ROOT` to an authorized local Thermal Cone research checkout, then use the controlled staging commands:
+
+    pnpm research:stage:thermal-cones
+    pnpm dev:thermal-cones
+    pnpm build:thermal-cones
+
+The implementation route is `/visualizations/thermal-cones`. Research-derived assets remain local and ignored; public deployment or redistribution is prohibited until licensing is explicitly cleared.
+
+See `docs/MVP_ACCEPTANCE.md` for scientific scope and release gates, `docs/ARCHITECTURE.md` for product architecture, and `docs/THERMAL_CONES_LOCAL_DEVELOPMENT.md` for the verified local workflow. See `AGENTS.md` for repository-wide governance.

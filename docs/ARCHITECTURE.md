@@ -1,15 +1,15 @@
 # Visifold Product Architecture
 
-Status: Initial MVP foundation
+Status: Thermal Cone MVP implemented for local/private development
 Decision date: 2026-08-29
 
-This document records the first implementation architecture for Visifold. It operates within the scientific scope and release gates in MVP_ACCEPTANCE.md and the ownership rules in the repository AGENTS.md.
+This document records the current Visifold implementation architecture. It operates within the scientific scope and release gates in MVP_ACCEPTANCE.md and the ownership rules in the repository AGENTS.md.
 
 ## Product position
 
 Visifold is an interactive scientific visualization platform for exploring abstract structures in physics and mathematics. The product is concept-centric, scientifically serious, and oriented toward advanced students, graduate students, and researchers. Scientific objects are primary; explanation is adjacent and available in greater depth on demand.
 
-The initial architecture leaves room for reusable visualization objects without introducing a generic engine before repeated product needs establish the right abstraction.
+The architecture supports reusable visualization objects without introducing a generic engine before repeated product needs establish the right abstraction.
 
 ## Technical stack
 
@@ -21,60 +21,65 @@ The initial architecture leaves room for reusable visualization objects without 
 - Zod for runtime validation at product contract boundaries
 - ESLint for linting and Vitest for focused package tests
 
-The platform is intentionally static and build-time oriented. It has no database, authentication, backend API, CMS, user account system, real-time scientific solver, container platform, or microservice layer.
+The platform remains static and build-time oriented. It has no database, authentication, backend API, CMS, user account system, real-time scientific solver, container platform, or microservice layer.
 
 ## Monorepo responsibilities
 
 ### apps/web
 
-The public Next.js application. It owns routes, composition, page metadata, product presentation, and application-level interaction. Scientific semantics and reusable 3D foundations should not be embedded directly in route components.
+The public Next.js application owns routes, composition, page metadata, product presentation, and application-level interaction. The Thermal Cone route is `/visualizations/thermal-cones`. It loads validated staged data on the server and hands plain contract data to the client workspace.
 
 ### packages/ui
 
-Small reusable product UI primitives. It begins with only the shared layout container required by the application shell. New components should be added only when an immediate reusable need exists.
+Small reusable product UI primitives. Components are added only when an immediate reusable need exists.
 
 ### packages/visualization
 
-The reusable scientific visualization boundary. It begins with a shared React Three Fiber canvas, camera and lighting defaults, a neutral test object, and a generic Zod parsing helper. It does not yet define a generic visualization-object engine or any Thermal Cone schema.
+The reusable scientific visualization boundary. Thermal Cone modules own the accepted Zod contract, exact probability-simplex embedding, piece-preserving Three.js geometry conversion, and React Three Fiber renderer. The renderer preserves every authoritative convex piece and region identity; it performs no welding, simplification, smoothing, interpolation, convexification, or decimation.
 
 ### docs, scripts, and tests
 
 - docs contains durable product, architecture, handoff, provenance, and release decisions.
-- scripts is reserved for explicit build-time verification and controlled staging tools.
-- tests is reserved for cross-package and product-level verification. Package-local tests stay with the package they validate.
+- scripts contains explicit build-time verification and controlled staging tools.
+- tests contains cross-package and product-level verification. Package-local tests stay with the package they validate.
 
-## Research handoff consumption
+## Thermal Cone research consumption
 
-The research workspace remains an upstream read-only source. Product development consumes the accepted handoff in place when direct access is available; it does not copy or reconstruct research assets casually.
+The research workspace remains an upstream read-only source. Product development consumes the accepted handoff in place when direct access is available.
 
 The configurable build-time variable is:
 
     VISIFOLD_RESEARCH_ROOT
 
-It identifies an authorized local research project checkout. The Thermal Cone handoff remains at the portable project-relative path exports/visifold. Machine-specific paths belong only in uncommitted local environment configuration. The variable is intentionally not prefixed with NEXT_PUBLIC_, so the research path cannot be embedded in browser code.
+It identifies an authorized local research project checkout. The accepted Thermal Cone handoff is found at the portable project-relative path `exports/visifold`. Machine-specific paths belong only in uncommitted local environment configuration. The variable is not prefixed with `NEXT_PUBLIC_`, so the research path cannot be embedded in browser code.
 
-The future controlled flow is:
+The controlled local flow is:
 
-    Research handoff
-    → manifest and SHA-256 verification
-    → runtime/schema validation
-    → controlled product staging
-    → website visualization
+    accepted handoff
+    → manifest revision and SHA-256 verification
+    → referenced-file hash and byte verification
+    → Zod contract validation
+    → controlled ignored staging artifact
+    → server-side page load
+    → interactive product rendering
 
-Only the generic validation boundary exists today. Thermal Cone schemas are not invented here. Research assets are not copied or exposed in the public build because redistribution licensing remains unresolved under MVP_ACCEPTANCE.md.
+`scripts/stage-thermal-cones.ts` verifies accepted manifest revision 1 and its recorded digest, every manifest-listed file, referenced case assets, validation checkpoints, case identity, piece counts, and normalized volume fractions. It stages only user-facing beta cases 0, 0.2, and 1.0 to `apps/web/.visifold-research/thermal-cones.json`. That artifact is ignored by Git and is not a redistributable product asset.
 
-## Geometry and interaction direction
+See THERMAL_CONES_LOCAL_DEVELOPMENT.md for the command sequence and verification boundary.
 
-The first real visualization can use a wide scientific viewport with an adjacent inspector without restructuring the shell. Camera manipulation, beta selection, region toggles, piece selection, and reset behavior remain future feature work. The current neutral geometry proves the shared rendering boundary only.
+## Interaction model
+
+The Thermal Cone MVP uses a wide scientific canvas with an adjacent inspector. Users can rotate and zoom the tetrahedral probability-simplex view, reset the camera, select beta 0, 0.2, or 1.0, toggle past/incomparable/future regions, and inspect an individual convex piece. Diagnostic beta 0.5 is not included in normal navigation.
+
+The explanation below the workspace is constrained to the accepted fixed four-level classical energy-population system. It must not imply arbitrary beta, arbitrary states, arbitrary spectra, or the full quantum state space.
 
 ## Intentionally deferred
 
-- Thermal Cone routes, geometry, scientific copy, and controls
-- Formal machine-readable research schemas
-- Research manifest verification and controlled staging scripts
-- A quantitative mesh fidelity budget and geometry optimization
+- Formal machine-readable upstream JSON Schemas
+- A quantitative mesh fidelity budget and all geometry optimization
 - Final attribution wording and placement
 - Redistribution licensing clearance
+- Possible future public exposure of diagnostic beta 0.5
 - A generalized visualization-object abstraction
 - Deployment and hosting configuration
 - Any backend, account, persistence, CMS, or real-time computation capability

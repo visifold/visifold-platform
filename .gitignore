@@ -1,0 +1,61 @@
+# Dependencies
+node_modules/
+
+# JavaScript and framework build output
+dist/
+build/
+out/
+.next/
+.nuxt/
+.svelte-kit/
+.vite/
+.turbo/
+.cache/
+coverage/
+*.tsbuildinfo
+
+# Test and deployment tool output
+playwright-report/
+test-results/
+.vercel/
+.netlify/
+
+# Local environment and secret-bearing configuration
+.env
+.env.*
+!.env.example
+!.env.*.example
+.envrc
+
+# Logs and runtime artifacts
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.pid
+
+# Python environments and caches used by future scripts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# OS metadata and temporary files
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+
+# Editor-local state
+.idea/
+.history/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.example.json

@@ -106,8 +106,12 @@ export function ThermalConeExplanation({ data }: { data: StagedThermalConeData }
           10.1103/PhysRevE.106.064109; arXiv:2207.02237v3.
         </p>
         <p>
-          This local-development build is locked to handoff revision{" "}
-          {data.provenance.manifest_revision}, manifest SHA-256{" "}
+          This{" "}
+          {data.artifact_role === "tracked-deployment-snapshot"
+            ? "prototype deployment snapshot"
+            : "verified local-development build"}{" "}
+          is locked to handoff revision {data.provenance.manifest_revision},
+          manifest SHA-256{" "}
           <span className="break-all font-mono text-xs text-[#989b9d]">
             {data.provenance.manifest_sha256}
           </span>
@@ -116,8 +120,8 @@ export function ThermalConeExplanation({ data }: { data: StagedThermalConeData }
         </p>
         <p className="border-l border-[#6b5f49] pl-4 text-[#a9a49a]">
           Redistribution licensing and final public attribution placement remain
-          unresolved. This page and its staged research derivative are for local
-          review only.
+          unresolved. This early-stage prototype is for testing and review, not
+          final publication.
         </p>
       </Section>
     </article>

@@ -7,6 +7,7 @@ import {
   HandoffManifestSchema,
   SUPPORTED_THERMAL_CONE_BETAS,
   StagedThermalConeDataSchema,
+  THERMAL_CONE_SOURCE_IDENTITY,
   ThermalConeCaseIndexSchema,
   ThermalConeSourceGeometrySchema,
   THERMAL_CONE_REGION_IDS,
@@ -294,7 +295,10 @@ export async function stageThermalCones(researchRootInput: string): Promise<{
   const stagedData = StagedThermalConeDataSchema.parse({
     schema: "visifold-thermal-cones-mvp-v1",
     release_status: "local-development-only",
+    artifact_role: "verified-local-staging",
+    supported_beta_cases: SUPPORTED_THERMAL_CONE_BETAS,
     provenance: {
+      source_identity: THERMAL_CONE_SOURCE_IDENTITY,
       manifest_revision: manifest.revision,
       manifest_sha256: manifestSha256,
       contract_sha256: sha256(contractBytes),

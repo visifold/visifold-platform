@@ -15,7 +15,8 @@
     "lint": "eslint apps packages scripts",
     "typecheck": "tsc --project tsconfig.scripts.json --noEmit && pnpm -r --if-present typecheck",
     "test": "vitest run scripts && pnpm -r --if-present test",
-    "research:stage:thermal-cones": "tsx scripts/stage-thermal-cones.ts"
+    "research:stage:thermal-cones": "tsx scripts/stage-thermal-cones.ts",
+    "data:snapshot:thermal-cones": "tsx scripts/snapshot-thermal-cones.ts"
   },
   "devDependencies": {
     "@types/node": "26.4.0",

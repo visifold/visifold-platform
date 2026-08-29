@@ -2,6 +2,10 @@ import { z } from "zod";
 
 export const SUPPORTED_THERMAL_CONE_BETAS = [0, 0.2, 1] as const;
 export const THERMAL_CONE_REGION_IDS = ["past", "incomparable", "future"] as const;
+export const THERMAL_CONE_SOURCE_IDENTITY = {
+  research_project: "Thermal Cone Visualization",
+  handoff_relative_path: "exports/visifold",
+} as const;
 
 export const SupportedThermalConeBetaSchema = z.union([
   z.literal(0),
@@ -173,8 +177,28 @@ export const StagedThermalConeCaseSchema = z.object({
 export const StagedThermalConeDataSchema = z
   .object({
     schema: z.literal("visifold-thermal-cones-mvp-v1"),
-    release_status: z.literal("local-development-only"),
+    release_status: z.enum([
+      "local-development-only",
+      "prototype-testing-only",
+    ]),
+    artifact_role: z.enum([
+      "verified-local-staging",
+      "tracked-deployment-snapshot",
+    ]),
+    supported_beta_cases: z.tuple([
+      z.literal(0),
+      z.literal(0.2),
+      z.literal(1),
+    ]),
     provenance: z.object({
+      source_identity: z.object({
+        research_project: z.literal(
+          THERMAL_CONE_SOURCE_IDENTITY.research_project,
+        ),
+        handoff_relative_path: z.literal(
+          THERMAL_CONE_SOURCE_IDENTITY.handoff_relative_path,
+        ),
+      }),
       manifest_revision: z.literal(1),
       manifest_sha256: z.string().regex(/^[a-f0-9]{64}$/),
       contract_sha256: z.string().regex(/^[a-f0-9]{64}$/),

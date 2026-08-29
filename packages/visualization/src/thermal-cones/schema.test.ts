@@ -84,7 +84,13 @@ function createCase(beta: 0 | 0.2 | 1) {
 const stagedData = {
   schema: "visifold-thermal-cones-mvp-v1",
   release_status: "local-development-only",
+  artifact_role: "verified-local-staging",
+  supported_beta_cases: [0, 0.2, 1],
   provenance: {
+    source_identity: {
+      research_project: "Thermal Cone Visualization",
+      handoff_relative_path: "exports/visifold",
+    },
     manifest_revision: 1,
     manifest_sha256: "a".repeat(64),
     contract_sha256: "b".repeat(64),

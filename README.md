@@ -46,9 +46,10 @@ The initial product foundation is a pnpm monorepo with a statically exported Nex
 The first research handoff is accepted for local/private MVP development. Configure `VISIFOLD_RESEARCH_ROOT` to an authorized local Thermal Cone research checkout, then use the controlled staging commands:
 
     pnpm research:stage:thermal-cones
+    pnpm data:snapshot:thermal-cones
     pnpm dev:thermal-cones
     pnpm build:thermal-cones
 
-The implementation route is `/visualizations/thermal-cones`. Research-derived assets remain local and ignored; public deployment or redistribution is prohibited until licensing is explicitly cleared.
+The implementation route is `/visualizations/thermal-cones`. Verified local staging remains ignored and preferred. A tracked, provenance-preserving snapshot under `apps/web/publication-data` provides an early-stage prototype/testing fallback for CI builds. It is not the final publication or redistribution-licensing policy.
 
 See `docs/MVP_ACCEPTANCE.md` for scientific scope and release gates, `docs/ARCHITECTURE.md` for product architecture, and `docs/THERMAL_CONES_LOCAL_DEVELOPMENT.md` for the verified local workflow. See `AGENTS.md` for repository-wide governance.

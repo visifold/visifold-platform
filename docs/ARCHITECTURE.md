@@ -53,19 +53,22 @@ The configurable build-time variable is:
 
 It identifies an authorized local research project checkout. The accepted Thermal Cone handoff is found at the portable project-relative path `exports/visifold`. Machine-specific paths belong only in uncommitted local environment configuration. The variable is not prefixed with `NEXT_PUBLIC_`, so the research path cannot be embedded in browser code.
 
-The controlled local flow is:
+The controlled product-data flow is:
 
     accepted handoff
     → manifest revision and SHA-256 verification
     → referenced-file hash and byte verification
     → Zod contract validation
-    → controlled ignored staging artifact
-    → server-side page load
+    → controlled ignored local staging artifact
+    → provenance-preserving prototype deployment snapshot
+    → local-first loader with tracked CI fallback
     → interactive product rendering
 
-`scripts/stage-thermal-cones.ts` verifies accepted manifest revision 1 and its recorded digest, every manifest-listed file, referenced case assets, validation checkpoints, case identity, piece counts, and normalized volume fractions. It stages only user-facing beta cases 0, 0.2, and 1.0 to `apps/web/.visifold-research/thermal-cones.json`. That artifact is ignored by Git and is not a redistributable product asset.
+`scripts/stage-thermal-cones.ts` verifies accepted manifest revision 1 and its recorded digest, every manifest-listed file, referenced case assets, validation checkpoints, case identity, piece counts, and normalized volume fractions. It stages only user-facing beta cases 0, 0.2, and 1.0 to `apps/web/.visifold-research/thermal-cones.json`.
 
-See THERMAL_CONES_LOCAL_DEVELOPMENT.md for the command sequence and verification boundary.
+`scripts/snapshot-thermal-cones.ts` validates that ignored staging artifact and copies its scientific payload unchanged to `apps/web/publication-data/thermal-cones/thermal-cones.json`, changing only product artifact-role and prototype-status metadata. The loader prefers verified local staging and uses the tracked snapshot only when local staging is absent.
+
+This tracked dataset is an explicit early-stage prototype/testing mechanism for CI and Vercel builds. It is not a final publication or redistribution-licensing policy. See THERMAL_CONES_LOCAL_DEVELOPMENT.md for the command sequence and release boundary.
 
 ## Interaction model
 
